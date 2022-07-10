@@ -15,6 +15,8 @@ module simple_errmsg_handler
     private
 
     ! exported items in this MODULE
+    public :: is_NG
+    public :: is_OK
     public :: type_errmsg_handler
 
 
