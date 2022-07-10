@@ -18,6 +18,7 @@ module simple_errmsg_handler
     public :: is_NG
     public :: is_OK
     public :: type_errmsg_handler
+    public :: type_iomsg_handler
 
 
 
