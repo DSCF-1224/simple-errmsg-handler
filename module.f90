@@ -15,6 +15,8 @@ module simple_errmsg_handler
     private
 
     ! exported items in this MODULE
+    public :: is_iostat_end
+    public :: is_iostat_eor
     public :: is_NG
     public :: is_OK
     public :: type_errmsg_handler
@@ -99,6 +101,20 @@ module simple_errmsg_handler
 
 
     ! INTERFACE definition
+    interface is_iostat_end
+        module procedure :: is_iostat_end_handler
+    end interface is_iostat_end
+
+
+
+    ! INTERFACE definition
+    interface is_iostat_eor
+        module procedure :: is_iostat_eor_handler
+    end interface is_iostat_eor
+
+
+
+    ! INTERFACE definition
     interface is_NG
         module procedure :: is_NG_handler
     end interface is_NG
@@ -116,9 +132,39 @@ module simple_errmsg_handler
 
 
 
+    pure elemental function is_iostat_end_handler (handler)
+
+        ! argument(s) for this FUNCTION
+        class(type_iomsg_handler) , intent(in) :: handler
+
+        ! return value of this FUNCTION
+        logical :: is_iostat_end_handler
+
+        is_iostat_end_handler = is_iostat_end(handler%code)
+        return
+
+    end function is_iostat_end_handler
+
+
+
+    pure elemental function is_iostat_eor_handler (handler)
+
+        ! argument(s) for this FUNCTION
+        class(type_iomsg_handler) , intent(in) :: handler
+
+        ! return value of this FUNCTION
+        logical :: is_iostat_eor_handler
+
+        is_iostat_eor_handler = is_iostat_eor(handler%code)
+        return
+
+    end function is_iostat_eor_handler
+
+
+
     pure elemental function is_NG_handler (handler)
 
-        ! bounded argument for this FUNCTION
+        ! argument(s) of this FUNCTION
         class(type_msg_handler) , intent(in) :: handler
 
         ! return value of this FUNCTION
@@ -133,7 +179,7 @@ module simple_errmsg_handler
 
     pure elemental function is_OK_handler (handler)
 
-        ! bounded argument for this FUNCTION
+        ! argument(s) of this FUNCTION
         class(type_msg_handler) , intent(in) :: handler
 
         ! return value of this FUNCTION
